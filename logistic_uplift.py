@@ -13,25 +13,16 @@ class LogisticUplift(linear_model.LogisticRegression):
                multi_class='ovr', verbose=0):
 
     
-    self.penalty = penalty
-    self.dual = dual
-    self.tol = tol
-    self.C = C
-    self.fit_intercept = fit_intercept
-    self.intercept_scaling = intercept_scaling
-    self.class_weight = class_weight
-    self.random_state = random_state
-    self.solver = solver
-    self.max_iter = max_iter
-    self.multi_class = multi_class
-    self.verbose = verbose
+    super(LogisticUplift,self).__init__(penalty, dual, tol, C, fit_intercept,
+					 intercept_scaling, class_weight, random_state, solver,
+					max_iter, multi_class, verbose)
 
   def fit(self,X,T,y):
     #setting up Treatment Variables X*T
     X_T = X*T
     X = np.concatenate((X,X_T), axis=1)
     X = np.concatenate((X,T), axis = 1)
-    super().fit(self, X, y)
+    super(LogisticUplift, self).fit(X, y)
 
 
      
