@@ -17,4 +17,12 @@ class LogisticUplift(linear_model.LogisticRegression):
     super(LogisticUplift, self).fit(X, y)
 
 
-     
+   def predict_uplift(self, X,T)
+   
+    X_T = np.concatenate((X,X,T), axis=1)  
+    X_no = np.concatenate((X,np.zeros_like(X),np.zeros_like(T)), axis=1)
+    	
+    y_T = super(LogisticUplift, self).predict_proba(X_T)
+    y_no = super(LogisticUplift, self).predict_proba(X_no)
+    
+    return y_T - y_no
